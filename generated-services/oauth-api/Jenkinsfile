@@ -1,0 +1,50 @@
+pipeline {
+  agent any
+  parameters {
+    choice(name: 'DEPLOY_TARGET', choices: ['kind', 'aws-ec2'], description: 'kind deploys locally, aws-ec2 pushes to Docker Hub and deploys EC2 with Terraform')
+    string(name: 'DOCKERHUB_USER', defaultValue: 'shadowger107', description: 'Docker Hub username')
+    string(name: 'IDP_URL', defaultValue: 'http://localhost:3000', description: 'Running IDP URL for status callback')
+  }
+  environment {
+    IMAGE_NAME = 'oauth-api:local'
+  }
+  stages {
+    stage('Install') {
+      steps { bat 'npm install' }
+    }
+    stage('Build Image') {
+      steps { bat 'docker build -t %IMAGE_NAME% .' }
+    }
+    stage('Deploy to kind') {
+      when { expression { params.DEPLOY_TARGET == 'kind' } }
+      steps {
+        bat 'kind load docker-image oauth-api:local --name sk-idp'
+        bat 'kubectl apply -f k8s'
+        bat 'kubectl rollout status deployment/oauth-api --timeout=60s'
+      }
+    }
+    stage('Push to Docker Hub') {
+      when { expression { params.DEPLOY_TARGET == 'aws-ec2' } }
+      steps {
+        withCredentials([string(credentialsId: 'dockerhub-token', variable: 'DOCKERHUB_TOKEN')]) {
+          bat 'docker login -u %DOCKERHUB_USER% -p %DOCKERHUB_TOKEN%'
+          bat 'docker tag %IMAGE_NAME% %DOCKERHUB_USER%/oauth-api:latest'
+          bat 'docker push %DOCKERHUB_USER%/oauth-api:latest'
+        }
+      }
+    }
+    stage('Terraform AWS EC2') {
+      when { expression { params.DEPLOY_TARGET == 'aws-ec2' } }
+      steps {
+        bat 'terraform -chdir=terraform init'
+        bat 'terraform -chdir=terraform apply -auto-approve -var "dockerhub_user=%DOCKERHUB_USER%"'
+      }
+    }
+    stage('Update IDP AWS URL') {
+      when { expression { params.DEPLOY_TARGET == 'aws-ec2' } }
+      steps {
+        bat 'update-idp.cmd %IDP_URL%'
+      }
+    }
+  }
+}

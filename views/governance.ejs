@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+<section class="topbar">
+  <div>
+    <h1>Governance</h1>
+    <p>Automated checks used before a service is added to the catalog.</p>
+  </div>
+</section>
+
+<section class="grid">
+  <% if (!checks.length) { %><div class="empty">No services to check.</div><% } %>
+  <% checks.forEach(check => { %>
+    <article class="card">
+      <h2><%= check.name %></h2>
+      <p class="<%= check.ok ? 'ok' : 'bad' %>"><%= check.ok ? 'Passed' : 'Needs attention' %></p>
+      <ul>
+        <% check.notes.forEach(note => { %><li><%= note %></li><% }) %>
+      </ul>
+    </article>
+  <% }) %>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+<section class="topbar">
+  <div>
+    <h1>API Gateway Design</h1>
+    <p>Simple route map for services. In kind this maps cleanly to ingress or a reverse proxy.</p>
+  </div>
+</section>
+
+<section class="panel">
+  <table>
+    <thead><tr><th>Path</th><th>Service</th><th>Cluster Target</th><th>Kind URL</th><th>AWS URL</th></tr></thead>
+    <tbody>
+      <% services.forEach(service => { %>
+        <tr>
+          <td><%= service.gatewayPath %></td>
+          <td><%= service.name %></td>
+          <td>http://<%= service.name %>.default.svc.cluster.local</td>
+          <td><%= service.publicUrl || 'not assigned' %></td>
+          <td><%= service.awsUrl || 'not deployed' %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include('partials/footer') %>

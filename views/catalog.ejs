@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+<section class="topbar">
+  <div>
+    <h1>Platform Catalog</h1>
+    <p>Services created through the golden path.</p>
+  </div>
+  <a class="button" href="/provision">New service</a>
+</section>
+
+<section class="grid">
+  <% if (!services.length) { %>
+    <div class="empty">No services yet. Create one from Provision.</div>
+  <% } %>
+  <% services.forEach(service => { %>
+    <article class="card">
+      <h2><%= service.name %></h2>
+      <p><%= service.template %> - <%= service.env %> - <%= service.replicas %> replica(s)</p>
+      <p>
+        <span class="status <%= service.runtimeStatus === 'running' ? 'status-ok' : 'status-down' %>">
+          <%= service.runtimeStatus %>
+        </span>
+      </p>
+      <dl>
+        <dt>Owner</dt><dd><%= service.owner %></dd>
+        <dt>Image</dt><dd><%= service.dockerImage || 'not assigned' %></dd>
+        <dt>Gateway</dt><dd><%= service.gatewayPath %></dd>
+        <dt>Kind URL</dt><dd><a href="<%= service.publicUrl %>" target="_blank"><%= service.publicUrl || 'deploy service first' %></a></dd>
+        <dt>Kind</dt><dd><%= service.localStatus %></dd>
+        <dt>AWS URL</dt><dd><% if (service.awsUrl) { %><a href="<%= service.awsUrl %>" target="_blank"><%= service.awsUrl %></a><% } else { %>not deployed<% } %></dd>
+        <dt>AWS</dt><dd><%= service.awsStatus %></dd>
+        <dt>Files</dt><dd><%= service.repoPath %></dd>
+      </dl>
+      <a href="/service/<%= service.name %>">Open</a>
+    </article>
+  <% }) %>
+</section>
+<%- include('partials/footer') %>

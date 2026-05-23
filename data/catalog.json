@@ -1,0 +1,21 @@
+[
+  {
+    "id": "e2856585-f9d5-40ed-b885-491d97183ec0",
+    "name": "oauth-api",
+    "owner": "sk@example.com",
+    "dockerHubUser": "shadowger107",
+    "template": "node-api",
+    "env": "dev",
+    "replicas": 1,
+    "costCenter": "learning",
+    "ownerLabel": "sk-example-com",
+    "status": "ready",
+    "createdAt": "2026-05-23T12:11:41.823Z",
+    "gatewayPath": "/api/oauth-api",
+    "nodePort": 31000,
+    "publicUrl": "http://localhost:31000",
+    "awsUrl": "",
+    "dockerImage": "shadowger107/oauth-api:latest",
+    "repoPath": "generated-services/oauth-api"
+  }
+]

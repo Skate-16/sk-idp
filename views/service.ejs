@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+<section class="topbar">
+  <div>
+    <h1><%= service.name %></h1>
+    <p><%= service.template %> golden path service.</p>
+    <span class="status <%= service.runtimeStatus === 'running' ? 'status-ok' : 'status-down' %>">
+      <%= service.runtimeStatus %>
+    </span>
+  </div>
+  <a class="button" href="/catalog">Back</a>
+</section>
+
+<section class="panel">
+  <h2>Generated Assets</h2>
+  <ul class="list">
+    <li>Application: <%= service.repoPath %>/index.js</li>
+    <li>Container: <%= service.repoPath %>/Dockerfile</li>
+    <li>Kubernetes: <%= service.repoPath %>/k8s</li>
+    <li>Pipeline: <%= service.repoPath %>/Jenkinsfile</li>
+    <li>Terraform: <%= service.repoPath %>/terraform</li>
+    <li>Docker Hub image: <%= service.dockerImage || 'not assigned' %></li>
+    <li>Kind URL: <a href="<%= service.publicUrl %>" target="_blank"><%= service.publicUrl || 'not assigned' %></a> (<%= service.localStatus %>)</li>
+    <li>Kind health URL: <%= service.localHealthUrl || 'not assigned' %></li>
+    <li>AWS EC2 URL: <% if (service.awsUrl) { %><a href="<%= service.awsUrl %>" target="_blank"><%= service.awsUrl %></a><% } else { %>not deployed<% } %> (<%= service.awsStatus %>)</li>
+    <li>AWS health URL: <%= service.awsHealthUrl || 'not assigned' %></li>
+  </ul>
+</section>
+
+<section class="panel">
+  <h2>Run Commands</h2>
+  <pre>cd <%= service.repoPath %>
+npm install
+npm start
+
+docker build -t <%= service.name %>:local .
+kind load docker-image <%= service.name %>:local --name sk-idp
+kubectl apply -f k8s</pre>
+</section>
+
+<section class="panel">
+  <h2>One Command Deploy</h2>
+  <pre>cd <%= service.repoPath %>
+deploy-kind.cmd</pre>
+</section>
+
+<section class="panel">
+  <h2>AWS EC2 Deploy</h2>
+  <pre>cd <%= service.repoPath %>
+set DOCKERHUB_USER=<%= service.dockerHubUser %>
+deploy-aws.cmd</pre>
+</section>
+<%- include('partials/footer') %>

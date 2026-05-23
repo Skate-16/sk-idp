@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+<section class="topbar">
+  <div>
+    <h1>Observability</h1>
+    <p>Platform activity and service count.</p>
+  </div>
+  <span class="metric"><%= count %> services</span>
+</section>
+
+<section class="panel">
+  <h2>Recent Events</h2>
+  <% if (!events.length) { %><p>No events yet.</p><% } %>
+  <ul class="events">
+    <% events.forEach(event => { %>
+      <li><strong><%= event.type %></strong> <%= event.message %> <span><%= event.time %></span></li>
+    <% }) %>
+  </ul>
+</section>
+<%- include('partials/footer') %>
