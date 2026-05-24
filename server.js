@@ -22,4 +22,4 @@ app.use('/', pageRoutes);
 app.use('/api', apiRoutes);
 app.get('/health', apiController.health);
 
-app.listen(PORT, () => console.log(`SK IDP running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`DevHelp running at http://localhost:${PORT}`));

@@ -1,6 +1,6 @@
-# SK IDP
+# DevHelp
 
-Mini internal developer platform built with HTML, CSS, JavaScript, EJS, Node and Express.
+DevHelp is a mini internal developer platform built with HTML, CSS, JavaScript, EJS, Node and Express.
 
 The platform itself runs simply with Node. Docker, Kubernetes kind, Jenkins and Terraform are used only for the developer services created from the platform.
 

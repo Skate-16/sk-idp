@@ -26,7 +26,7 @@ function buildJobXml(serviceName) {
 
   return `<?xml version='1.1' encoding='UTF-8'?>
 <flow-definition plugin="workflow-job">
-  <description>Auto-created by SK IDP for ${serviceName}</description>
+  <description>Auto-created by DevHelp for ${serviceName}</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>

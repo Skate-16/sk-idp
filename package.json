@@ -1,7 +1,7 @@
 {
-  "name": "sk-idp",
+  "name": "devhelp",
   "version": "1.0.0",
-  "description": "Mini internal developer platform with Express that generates Docker, Kubernetes, Jenkins and Terraform assets for services.",
+  "description": "DevHelp internal developer platform with Express that generates Docker, Kubernetes, Jenkins and Terraform assets for services.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

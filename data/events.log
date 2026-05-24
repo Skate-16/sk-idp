@@ -23,3 +23,7 @@
 {"time":"2026-05-24T05:45:48.884Z","type":"provision","message":"Created oauth-api","meta":{"owner":"dev2@example.com","env":"dev"}}
 {"time":"2026-05-24T05:47:34.563Z","type":"aws-url","message":"Updated AWS URL for oauth-api","meta":{"awsUrl":"http://13.60.236.162"}}
 {"time":"2026-05-24T05:48:33.695Z","type":"delete","message":"Deleted oauth-api","meta":{"service":"oauth-api"}}
+{"time":"2026-05-24T06:00:01.575Z","type":"delete","message":"Deleted payment-api","meta":{"service":"payment-api"}}
+{"time":"2026-05-24T06:07:17.537Z","type":"provision","message":"Created payment-api","meta":{"owner":"dev@example.com","env":"dev"}}
+{"time":"2026-05-24T06:08:58.181Z","type":"aws-url","message":"Updated AWS URL for payment-api","meta":{"awsUrl":"http://13.61.22.212"}}
+{"time":"2026-05-24T06:11:05.883Z","type":"delete","message":"Deleted payment-api","meta":{"service":"payment-api"}}
