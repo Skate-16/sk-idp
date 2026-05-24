@@ -28,4 +28,12 @@ function update(name, changes) {
   return service;
 }
 
-module.exports = { all, save, findByName, add, update };
+function remove(name) {
+  const services = all();
+  const next = services.filter(service => service.name !== name);
+  if (next.length === services.length) return null;
+  save(next);
+  return services.find(service => service.name === name);
+}
+
+module.exports = { all, save, findByName, add, update, remove };

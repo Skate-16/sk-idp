@@ -28,4 +28,12 @@ function appendLine(filePath, content) {
   fs.appendFileSync(filePath, content + '\n');
 }
 
-module.exports = { ensureDir, ensureFile, readJson, writeJson, readText, writeText, appendLine };
+function removeDir(dirPath) {
+  if (fs.existsSync(dirPath)) fs.rmSync(dirPath, { recursive: true, force: true });
+}
+
+function exists(filePath) {
+  return fs.existsSync(filePath);
+}
+
+module.exports = { ensureDir, ensureFile, readJson, writeJson, readText, writeText, appendLine, removeDir, exists };

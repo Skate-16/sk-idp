@@ -1,21 +1,21 @@
 [
   {
-    "id": "e2856585-f9d5-40ed-b885-491d97183ec0",
-    "name": "oauth-api",
-    "owner": "sk@example.com",
+    "id": "03acbede-6e3f-4e88-8c0d-eecd20f252b1",
+    "name": "payment-api",
+    "owner": "dev@example.com",
     "dockerHubUser": "shadowger107",
     "template": "node-api",
     "env": "dev",
     "replicas": 1,
     "costCenter": "learning",
-    "ownerLabel": "sk-example-com",
+    "ownerLabel": "dev-example-com",
     "status": "ready",
-    "createdAt": "2026-05-23T12:11:41.823Z",
-    "gatewayPath": "/api/oauth-api",
+    "createdAt": "2026-05-24T05:42:25.858Z",
+    "gatewayPath": "/api/payment-api",
     "nodePort": 31000,
     "publicUrl": "http://localhost:31000",
-    "awsUrl": "",
-    "dockerImage": "shadowger107/oauth-api:latest",
-    "repoPath": "generated-services/oauth-api"
+    "awsUrl": "http://51.20.191.160",
+    "dockerImage": "shadowger107/payment-api:latest",
+    "repoPath": "generated-services/payment-api"
   }
 ]

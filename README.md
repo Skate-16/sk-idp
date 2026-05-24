@@ -182,6 +182,20 @@ The Jenkins job also needs AWS credentials available on the Jenkins machine, usu
 aws configure
 ```
 
+## Repair Existing Generated Services
+
+If you changed the generator after creating services, update all existing generated service folders:
+
+```cmd
+scripts\repair-generated-services.cmd
+```
+
+To also update the matching Jenkins jobs with the latest generated Jenkinsfile:
+
+```cmd
+scripts\repair-generated-services.cmd --sync-jenkins
+```
+
 For real apps, the usual order is:
 
 ```text

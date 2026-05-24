@@ -31,6 +31,9 @@
         <dt>Files</dt><dd><%= service.repoPath %></dd>
       </dl>
       <a href="/service/<%= service.name %>">Open</a>
+      <form method="post" action="/service/<%= service.name %>/delete" onsubmit="return confirm('Delete <%= service.name %> and its generated files?');">
+        <button class="danger" type="submit">Delete</button>
+      </form>
     </article>
   <% }) %>
 </section>

@@ -7,7 +7,12 @@
       <%= service.runtimeStatus %>
     </span>
   </div>
-  <a class="button" href="/catalog">Back</a>
+  <div class="actions">
+    <a class="button" href="/catalog">Back</a>
+    <form method="post" action="/service/<%= service.name %>/delete" onsubmit="return confirm('Delete <%= service.name %> and its generated files?');">
+      <button class="danger" type="submit">Delete</button>
+    </form>
+  </div>
 </section>
 
 <section class="panel">

@@ -68,6 +68,21 @@ p { color: var(--muted); }
   font-weight: 700;
 }
 .button:hover { background: var(--brand-dark); }
+.danger {
+  border: 1px solid #f1a29a;
+  border-radius: 6px;
+  background: #fff5f5;
+  color: var(--bad);
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.danger:hover { background: #ffe7e5; }
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 .grid {
   display: grid;

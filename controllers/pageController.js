@@ -3,6 +3,7 @@ const eventModel = require('../models/eventModel');
 const { catalogChecks } = require('../services/governanceService');
 const { withRuntimeStatus } = require('../services/statusService');
 const provisionService = require('../services/provisionService');
+const { deleteService } = require('../services/deleteService');
 
 async function catalog(req, res) {
   res.render('catalog', { services: await withRuntimeStatus(catalogModel.all()) });
@@ -12,8 +13,8 @@ function provisionForm(req, res) {
   res.render('provision', { errors: [], values: { template: 'node-api', env: 'dev', replicas: 1 } });
 }
 
-function createService(req, res) {
-  const result = provisionService.provision(req.body);
+async function createService(req, res) {
+  const result = await provisionService.provision(req.body);
   if (result.errors) {
     const status = result.errors.includes('Service already exists in catalog.') ? 409 : 400;
     return res.status(status).render('provision', { errors: result.errors, values: result.values });
@@ -40,6 +41,12 @@ function observability(req, res) {
   res.render('observability', { events: eventModel.recent(), count: catalogModel.all().length });
 }
 
+function removeService(req, res) {
+  const deleted = deleteService(req.params.name);
+  if (!deleted) return res.status(404).send('Service not found');
+  res.redirect('/catalog');
+}
+
 module.exports = {
   catalog,
   provisionForm,
@@ -47,5 +54,6 @@ module.exports = {
   serviceDetails,
   gateway,
   governance,
-  observability
+  observability,
+  removeService
 };
